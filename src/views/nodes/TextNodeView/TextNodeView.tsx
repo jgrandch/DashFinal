@@ -1,8 +1,9 @@
 import { observer } from "mobx-react";
-import { StaticTextNodeStore } from "../../stores/StaticTextNodeStore";
-import "./NodeView.scss";
-import { TopBar } from "./TopBar";
 import * as React from 'react';
+import { StaticTextNodeStore } from "../../../stores";
+import { TopBar } from "../TopBar";
+import "./../NodeView.scss";
+import "./TextNodeView.scss";
 
 interface TextNodeProps {
     store: StaticTextNodeStore;
@@ -14,7 +15,7 @@ export class TextNodeView extends React.Component<TextNodeProps> {
     render() {
         let store = this.props.store;
         return (
-            <div className="node text-node" style={{ transform: store.transform }} onWheel={(e: React.WheelEvent) => {
+            <div className="node textNode" style={{ transform: store.transform }} onWheel={(e: React.WheelEvent) => {
                 e.stopPropagation();
                 e.preventDefault();
             }}>

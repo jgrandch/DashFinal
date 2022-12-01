@@ -1,7 +1,6 @@
 .node {
     position: absolute;
     background: #cdcdcd;
-
     width: 300px;
     height: 300px;
     overflow: hidden;
@@ -12,17 +11,10 @@
         height: 30px;
     }
 
-    .top {
-        background: #232323;
-        height: 20px;
-        cursor: pointer;
-    }
-
     .content {
         padding: 20px 20px;
         height: auto;
         box-sizing: border-box;
-
     }
 
     .scroll-box {
@@ -30,4 +22,3 @@
         height: calc(100% - 20px);
     }
 }
-

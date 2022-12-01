@@ -15,7 +15,7 @@ interface FreeFormProps {
 @observer
 export class FreeFormCanvas extends React.Component<FreeFormProps> {
 
-    private isPointerDown: boolean;
+    private isPointerDown: boolean | undefined;
 
     onPointerDown = (e: React.PointerEvent): void => {
         e.stopPropagation();
@@ -60,7 +60,7 @@ export class FreeFormCanvas extends React.Component<FreeFormProps> {
                                     return (<VideoNodeView key={nodeStore.Id} store={nodeStore as VideoNodeStore}/>)
 
                                 default:
-                                    break;
+                                    return (null);
                             }
                         })
                     }

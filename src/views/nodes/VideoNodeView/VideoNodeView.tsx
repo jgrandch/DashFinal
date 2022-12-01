@@ -1,9 +1,9 @@
 import { observer } from "mobx-react";
-import { VideoNodeStore } from "../../stores/VideoNodeStore";
-import "./NodeView.scss";
-import { TopBar } from "./TopBar";
-import "./VideoNodeView.scss";
 import * as React from 'react';
+import { VideoNodeStore } from "../../../stores";
+import "./../NodeView.scss";
+import { TopBar } from "./../TopBar";
+import "./VideoNodeView.scss";
 
 interface VideoNodeProps {
     store: VideoNodeStore;
@@ -15,7 +15,7 @@ export class VideoNodeView extends React.Component<VideoNodeProps> {
     render() {
         let store = this.props.store;
         return (
-            <div className="node text-node" style={{ transform: store.transform }}>
+            <div className="node videoNode" style={{ transform: store.transform }}>
                 <TopBar store={store}/>
                 <div className="scroll-box">
                     <div className="content">

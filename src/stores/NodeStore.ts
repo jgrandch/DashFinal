@@ -2,14 +2,15 @@ import { computed, observable } from "mobx";
 import { Utils } from "../Utils";
 
 export enum StoreType {
-    Text, Video
+    Text, 
+    Video
 }
 
 export class NodeStore {
 
     public Id: string = Utils.GenerateGuid();
 
-    public type: StoreType = null;
+    public type: StoreType | null = null;
 
     @observable
     public x: number = 0;

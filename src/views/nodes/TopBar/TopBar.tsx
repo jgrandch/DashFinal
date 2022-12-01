@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
-import { NodeStore } from "../../stores/NodeStore";
-import "./NodeView.scss";
 import * as React from 'react';
+import { NodeStore } from "../../../stores";
+import "./TopBar.scss";
 
 interface TopBarProps {
     store: NodeStore;
@@ -40,6 +40,6 @@ export class TopBar extends React.Component<TopBarProps> {
     }
 
     render() {
-        return <div className="top" onPointerDown={this.onPointerDown} />
+        return <div className="topbar" onPointerDown={this.onPointerDown} />
     }
 }
