@@ -1,12 +1,8 @@
 import { observer } from "mobx-react";
-import { NodeCollectionStore } from "../../stores/NodeCollectionStore";
-import "./FreeFormCanvas.scss";
 import * as React from 'react';
-import { StaticTextNodeStore } from "../../stores/StaticTextNodeStore";
-import { VideoNodeStore } from "../../stores/VideoNodeStore";
-import { TextNodeView } from "../nodes/TextNodeView";
-import { VideoNodeView } from "../nodes/VideoNodeView";
-import { StoreType } from "../../stores/NodeStore";
+import { NodeCollectionStore, StaticTextNodeStore, StoreType, VideoNodeStore } from "../../stores";
+import { TextNodeView, VideoNodeView } from "../nodes";
+import "./FreeFormCanvas.scss";
 
 interface FreeFormProps {
     store: NodeCollectionStore
