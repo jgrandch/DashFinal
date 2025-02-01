@@ -3,6 +3,7 @@ import * as React from 'react';
 import { NodeStore } from "../../../stores";
 import "./TopBar.scss";
 
+
 interface TopBarProps {
     store: NodeStore;
 }
@@ -37,9 +38,15 @@ export class TopBar extends React.Component<TopBarProps> {
 
         this.props.store.x += e.movementX;
         this.props.store.y += e.movementY;
+    
+
     }
 
     render() {
-        return <div className="topbar" onPointerDown={this.onPointerDown} />
+        return (
+  
+        <div className="topbar" onPointerDown={this.onPointerDown} />
+       
+        );
     }
 }

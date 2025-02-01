@@ -4,7 +4,7 @@ import { NodeCollectionStore, NodeStore, StaticTextNodeStore, StoreType, VideoNo
 import { ImageNodeStore } from "../../stores";
 import { ImageNodeView, NestedCanvasView } from "../nodes";
 import { TextNodeView, VideoNodeView } from "../nodes";
-import "./FreeFormCanvas.scss";
+import "./NestedFreeFormCanvas.scss";
 import { WebNodeView } from "../nodes/WebNodeView/WebNodeView";
 import { NestedNodeStore } from "../../stores/NestedNodeStore";
 
@@ -12,21 +12,20 @@ import { NestedNodeStore } from "../../stores/NestedNodeStore";
 
 
 
-interface FreeFormProps {
+interface NestedFreeFormProps {
     store: NodeCollectionStore
 }
 
-//Modified to permit resizing and efficient text editing. Can only execute the canvas scrolling function when the shift key is down!
+
 @observer
-export class FreeFormCanvas extends React.Component<FreeFormProps> {
+export class NestedFreeFormCanvas extends React.Component<NestedFreeFormProps> {
 
     
+
+
     private isPointerDown: boolean | undefined;
 
     onPointerDown = (e: React.PointerEvent): void => {
-        // Only proceed if Shift key is pressed
-        if (!e.shiftKey) return;
-
         e.stopPropagation();
         e.preventDefault();
         this.isPointerDown = true;
@@ -37,9 +36,8 @@ export class FreeFormCanvas extends React.Component<FreeFormProps> {
     }
 
     onPointerUp = (e: PointerEvent): void => {
-        // Only proceed if Shift key is pressed
-        if (!e.shiftKey) return;
-
+     
+     
         e.stopPropagation();
         e.preventDefault();
         this.isPointerDown = false;
@@ -48,17 +46,13 @@ export class FreeFormCanvas extends React.Component<FreeFormProps> {
     }
 
     onPointerMove = (e: PointerEvent): void => {
-        // Only proceed if Shift key is pressed and pointer is down
-        if (!this.isPointerDown || !e.shiftKey) return;
-
+  
         e.stopPropagation();
         e.preventDefault();
+        if (!this.isPointerDown) return; 
         this.props.store.x += e.movementX;
         this.props.store.y += e.movementY;
-        this.props.store.cornerx += e.movementX;
-        this.props.store.cornery += e.movementY;
     }
-
 
     
 
@@ -67,10 +61,9 @@ export class FreeFormCanvas extends React.Component<FreeFormProps> {
         return (
             
             
-            <div className="freeformcanvas-container" 
-            onPointerDown={this.onPointerDown}
-            >
-                <div className="freeformcanvas" style={{ transform: store.transform }}>
+            <div className="nestedfreeformcanvas-container" 
+            onPointerDown={this.onPointerDown}>
+                <div className="nestedfreeformcanvas" style={{ transform: store.transform }}>
                     {   
                         // maps each item in the store to be rendered in the canvas based on the node type
                         store.nodes.map(nodeStore => {

@@ -1,17 +1,19 @@
 import { observer } from "mobx-react";
 import * as React from 'react';
-import { NodeCollectionStore, VideoNodeStore } from "../../../stores";
+import { NodeCollectionStore, WebNodeStore } from "../../../stores";
+import { TopBar } from "../TopBar";
 import "./../NodeView.scss";
-import { TopBar } from "./../TopBar";
-import "./VideoNodeView.scss";
+import "./WebNodeView.scss";
 
-interface VideoNodeProps {
-    store: VideoNodeStore;
+interface WebNodeProps {
+    store: WebNodeStore;
     group: NodeCollectionStore 
 }
 
+
 @observer
-export class VideoNodeView extends React.Component<VideoNodeProps> {
+export class WebNodeView extends React.Component<WebNodeProps> {
+
     state = {
         // Track whether the user is in linking mode
         isLinking: false,
@@ -39,14 +41,24 @@ export class VideoNodeView extends React.Component<VideoNodeProps> {
 
 
     render() {
+
+
         const { store } = this.props;
         const { isLinking } = this.state;
+
+     
         return (
-            <div className="node videoNode"
-            onClick={() => this.handleNodeClick(store.Id)} 
-            style={{ transform: store.transform }}>
-                <TopBar store={store}/>
-                <button onClick={this.startLinking}>Start Linking</button>
+     
+            
+             <div className="node webNode" 
+             onClick={() => this.handleNodeClick(store.Id)}
+             style={{ transform: store.transform }} onWheel={(e: React.WheelEvent) => {
+                e.stopPropagation();
+                e.preventDefault();
+            }}>
+               
+            <TopBar store={store}/>
+            <button onClick={this.startLinking}>Start Linking</button>
                 {/* display linking mode */}
                 {isLinking && <p>Click on this node again to link!</p>}
             
@@ -62,13 +74,21 @@ export class VideoNodeView extends React.Component<VideoNodeProps> {
                         </select>
                  
                 )}
-                <div className="scroll-box">
-                    <div className="content">
+            <div className="scroll-box">
+            <div className="content">
                         <h3 className="title">{store.title}</h3>
-                        <video src={store.url} controls />
                     </div>
+            {/* iframe hold the static map website */}
+            <iframe
+                id="WebMap"
+                title="WebMap"
+                width="auto"
+                height="auto"
+                src={store.url}>
+                </iframe>   
                 </div>
-            </div>
+            </div> 
+
         );
     }
 }

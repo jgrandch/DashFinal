@@ -1,6 +1,11 @@
 .node {
     &.textNode {
-        background: pink;
+        background: palegreen;
+        overflow: hidden;
+        resize: both;
+ 
     }
 }
+
+
 

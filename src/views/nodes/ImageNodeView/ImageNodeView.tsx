@@ -1,17 +1,19 @@
 import { observer } from "mobx-react";
 import * as React from 'react';
-import { NodeCollectionStore, VideoNodeStore } from "../../../stores";
+import { TopBar } from "../TopBar";
+import { ImageNodeStore } from "../../../stores/ImageNodeStore";
 import "./../NodeView.scss";
-import { TopBar } from "./../TopBar";
-import "./VideoNodeView.scss";
-
-interface VideoNodeProps {
-    store: VideoNodeStore;
+import "./ImageNodeView.scss";
+import { NodeCollectionStore } from "../../../stores";
+ 
+interface ImageNodeProps {
+    store: ImageNodeStore; 
+    // access to all other nodes in the group
     group: NodeCollectionStore 
 }
 
 @observer
-export class VideoNodeView extends React.Component<VideoNodeProps> {
+export class ImageNodeView extends React.Component<ImageNodeProps> {
     state = {
         // Track whether the user is in linking mode
         isLinking: false,
@@ -37,15 +39,16 @@ export class VideoNodeView extends React.Component<VideoNodeProps> {
         }
     };
 
-
     render() {
         const { store } = this.props;
         const { isLinking } = this.state;
+
         return (
-            <div className="node videoNode"
-            onClick={() => this.handleNodeClick(store.Id)} 
-            style={{ transform: store.transform }}>
-                <TopBar store={store}/>
+            // Associate nodeId w/store.id here.
+            <div className="node imageNode" style={{ transform: store.transform }} 
+                onClick={() => this.handleNodeClick(store.Id)}>
+                <TopBar store={store} />
+
                 <button onClick={this.startLinking}>Start Linking</button>
                 {/* display linking mode */}
                 {isLinking && <p>Click on this node again to link!</p>}
@@ -62,10 +65,11 @@ export class VideoNodeView extends React.Component<VideoNodeProps> {
                         </select>
                  
                 )}
+                
                 <div className="scroll-box">
                     <div className="content">
                         <h3 className="title">{store.title}</h3>
-                        <video src={store.url} controls />
+                        <img src={store.url} alt="Image" />
                     </div>
                 </div>
             </div>
